@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorkBuilderForm", "ZorkBuilderForm\ZorkBuilderForm.csproj", "{DD77958D-A0F5-41D6-8DB8-6BA171BB59AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorkBuilderForm.WinForms", "ZorkBuilderForm\ZorkBuilderForm.WinForms.csproj", "{DD77958D-A0F5-41D6-8DB8-6BA171BB59AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZorkBuilder.Data", "ZorkBuilder.Data\ZorkBuilder.Data.csproj", "{63539B26-F11B-459A-AD60-57B49CDF6BE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZorkBuilder.Data", "ZorkBuilder.Data\ZorkBuilder.Data.csproj", "{63539B26-F11B-459A-AD60-57B49CDF6BE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

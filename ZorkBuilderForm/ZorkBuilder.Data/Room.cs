@@ -9,5 +9,10 @@ namespace ZorkBuilder.Data
         public string Name { get; set; }
         public string Description { get; set; }
         public Neighbor Neighbors { get; set; }
+
+        public Room()
+        {
+            Neighbors = new Neighbor();
+        }
     }
 }
