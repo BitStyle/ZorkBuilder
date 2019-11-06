@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZorkBuilder.Data
 {
-    class Neighbor
+    public class Neighbor
     {
         public string North { get; set; }
         public string South { get; set; }

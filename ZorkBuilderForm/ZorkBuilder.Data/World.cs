@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZorkBuilder.Data
 {
-    class World
+    public class World
     {
         public string StartingLocation { get; set; }
         public List<Room> Rooms { get; set; }
