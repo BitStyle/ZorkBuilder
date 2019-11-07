@@ -84,6 +84,7 @@ namespace ZorkBuilderForm.WinForms
                 ViewModel.SaveGame();
                 Game game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(createNewDialog.FileName));
                 ViewModel.Game = game;
+                //ViewModel.Rooms = new BindingList<Room>{ new Room { Name = "Start" } };
                 IsGameLoaded = true;
             }
         }
