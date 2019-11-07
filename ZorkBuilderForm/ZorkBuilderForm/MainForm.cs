@@ -81,10 +81,10 @@ namespace ZorkBuilderForm.WinForms
             if (createNewDialog.ShowDialog() == DialogResult.OK)
             {
                 ViewModel.Filename = createNewDialog.FileName;
+                ViewModel.Rooms = new BindingList<Room> { new Room { Name = "Start" } };
                 ViewModel.SaveGame();
                 Game game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(createNewDialog.FileName));
                 ViewModel.Game = game;
-                //ViewModel.Rooms = new BindingList<Room>{ new Room { Name = "Start" } };
                 IsGameLoaded = true;
             }
         }
