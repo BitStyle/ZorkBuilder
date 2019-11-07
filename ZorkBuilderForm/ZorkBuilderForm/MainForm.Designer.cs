@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.zorkMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,11 +57,14 @@
             this.addRoomButton = new System.Windows.Forms.Button();
             this.roomsListBox = new System.Windows.Forms.ListBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.gameDetailsTab = new System.Windows.Forms.TabPage();
-            this.welcomeMessageLabel = new System.Windows.Forms.Label();
-            this.welcomeMessageTextBox = new System.Windows.Forms.TextBox();
+            this.startingLocationTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.welcomeMessageTextBox = new System.Windows.Forms.TextBox();
+            this.welcomeMessageLabel = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.createNewDialog = new System.Windows.Forms.SaveFileDialog();
             this.zorkMenuStrip.SuspendLayout();
             this.zorkTabControl.SuspendLayout();
             this.roomsTab.SuspendLayout();
@@ -82,6 +86,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewGameToolStripMenuItem,
             this.openWorldToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -91,35 +96,45 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
+            // createNewGameToolStripMenuItem
+            // 
+            this.createNewGameToolStripMenuItem.Name = "createNewGameToolStripMenuItem";
+            this.createNewGameToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.createNewGameToolStripMenuItem.Text = "&Create New Game...";
+            this.createNewGameToolStripMenuItem.Click += new System.EventHandler(this.CreateNewGameToolStripMenuItem_Click);
+            // 
             // openWorldToolStripMenuItem
             // 
             this.openWorldToolStripMenuItem.Name = "openWorldToolStripMenuItem";
-            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.openWorldToolStripMenuItem.Text = "&Open World...";
+            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.openWorldToolStripMenuItem.Text = "&Open Game...";
             this.openWorldToolStripMenuItem.Click += new System.EventHandler(this.openWorldToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(144, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // zorkTabControl
             // 
@@ -277,6 +292,7 @@
             this.deleteRoomButton.TabIndex = 3;
             this.deleteRoomButton.Text = "&Delete";
             this.deleteRoomButton.UseVisualStyleBackColor = true;
+            this.deleteRoomButton.Click += new System.EventHandler(this.DeleteRoomButton_Click);
             // 
             // addRoomButton
             // 
@@ -286,6 +302,7 @@
             this.addRoomButton.TabIndex = 2;
             this.addRoomButton.Text = "&Add...";
             this.addRoomButton.UseVisualStyleBackColor = true;
+            this.addRoomButton.Click += new System.EventHandler(this.AddRoomButton_Click);
             // 
             // roomsListBox
             // 
@@ -307,12 +324,9 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.Filter = "Game Files (*json)|*.json";
-            // 
             // gameDetailsTab
             // 
+            this.gameDetailsTab.Controls.Add(this.startingLocationTextBox);
             this.gameDetailsTab.Controls.Add(this.label1);
             this.gameDetailsTab.Controls.Add(this.welcomeMessageTextBox);
             this.gameDetailsTab.Controls.Add(this.welcomeMessageLabel);
@@ -324,14 +338,22 @@
             this.gameDetailsTab.Text = "Game Details";
             this.gameDetailsTab.UseVisualStyleBackColor = true;
             // 
-            // welcomeMessageLabel
+            // startingLocationTextBox
             // 
-            this.welcomeMessageLabel.AutoSize = true;
-            this.welcomeMessageLabel.Location = new System.Drawing.Point(7, 7);
-            this.welcomeMessageLabel.Name = "welcomeMessageLabel";
-            this.welcomeMessageLabel.Size = new System.Drawing.Size(101, 13);
-            this.welcomeMessageLabel.TabIndex = 0;
-            this.welcomeMessageLabel.Text = "Welcome Message:";
+            this.startingLocationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.worldViewModelBindingSource, "World.StartingLocation", true));
+            this.startingLocationTextBox.Location = new System.Drawing.Point(10, 125);
+            this.startingLocationTextBox.Name = "startingLocationTextBox";
+            this.startingLocationTextBox.Size = new System.Drawing.Size(246, 20);
+            this.startingLocationTextBox.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 108);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Starting Location:";
             // 
             // welcomeMessageTextBox
             // 
@@ -342,14 +364,28 @@
             this.welcomeMessageTextBox.Size = new System.Drawing.Size(444, 64);
             this.welcomeMessageTextBox.TabIndex = 1;
             // 
-            // label1
+            // welcomeMessageLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Starting Location:";
+            this.welcomeMessageLabel.AutoSize = true;
+            this.welcomeMessageLabel.Location = new System.Drawing.Point(7, 7);
+            this.welcomeMessageLabel.Name = "welcomeMessageLabel";
+            this.welcomeMessageLabel.Size = new System.Drawing.Size(101, 13);
+            this.welcomeMessageLabel.TabIndex = 0;
+            this.welcomeMessageLabel.Text = "Welcome Message:";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "Game Files (*json)|*.json";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Game Files (*json)|*.json";
+            this.saveFileDialog.Title = "Save game file";
+            // 
+            // createNewDialog
+            // 
+            this.createNewDialog.Filter = "Game Files (*json)|*.json";
+            this.createNewDialog.Title = "Create game file";
             // 
             // MainForm
             // 
@@ -409,6 +445,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox welcomeMessageTextBox;
         private System.Windows.Forms.Label welcomeMessageLabel;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.SaveFileDialog createNewDialog;
+        private System.Windows.Forms.ToolStripMenuItem createNewGameToolStripMenuItem;
+        private System.Windows.Forms.TextBox startingLocationTextBox;
     }
 }
 

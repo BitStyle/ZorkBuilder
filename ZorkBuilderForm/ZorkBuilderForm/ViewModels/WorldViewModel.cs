@@ -15,6 +15,7 @@ namespace ZorkBuilderForm.WinForms.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public string Filename { get; set; }
         public BindingList<Room> Rooms { get; set; }
+        public World World { get; set; }
         public string WelcomeMessage { get; set; }
         private Game mGame;
         public Game Game
@@ -27,11 +28,13 @@ namespace ZorkBuilderForm.WinForms.ViewModels
                     if(mGame != null)
                     {
                         WelcomeMessage = mGame.WelcomeMessage;
+                        World = mGame.World;
                         Rooms = new BindingList<Room>(mGame.World.Rooms);
                     }
                     else
                     {
                         WelcomeMessage = "";
+                        World = new World();
                         Rooms = new BindingList<Room>(Array.Empty<Room>());
                     }
                 }
